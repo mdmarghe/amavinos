@@ -20,7 +20,7 @@ def events(request):
     products = Product.objects.filter(category__name='Cata de Vino')
 
     context = {'products': products, 'cartItems': cartItems}
-    return render(request, 'store/catas.html', context)
+    return render(request, 'store/provacatas.html', context)
 
 def store(request):
     data = cartData(request)
