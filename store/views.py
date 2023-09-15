@@ -5,16 +5,34 @@ import datetime
 from .models import * 
 from .utils import cookieCart, cartData, guestOrder
 
+
+def home(request):
+	return render(request,'store/homepage.html',{})
+
+
+def events(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+
+    # Filtra i prodotti della categoria "Degustazioni di vini"
+    products = Product.objects.filter(category__name='Cata de Vino')
+
+    context = {'products': products, 'cartItems': cartItems}
+    return render(request, 'store/catas.html', context)
+
 def store(request):
-	data = cartData(request)
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
 
-	cartItems = data['cartItems']
-	order = data['order']
-	items = data['items']
+    # Filtra i prodotti della categoria "Vini"
+    products = Product.objects.filter(category__id=2)
 
-	products = Product.objects.all()
-	context = {'products':products, 'cartItems':cartItems}
-	return render(request, 'store/store.html', context)
+    context = {'products': products, 'cartItems': cartItems}
+    return render(request, 'store/store.html', context)
 
 
 def cart(request):
