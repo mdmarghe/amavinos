@@ -1,4 +1,4 @@
-{% load static %}
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,14 +88,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ti-icons@0.1.2/css/themify-icons.css">
 <div class="events_area">
 <div class="container">
-<div class="row justify-content-center">
+    <div class="row justify-content-center">   
+    <img src="images/amavinos_logo.png" alt="Logo AMAVINOS">
+    </div>
+<div class="row justify-content-center">    
 <div class="col-lg-12">
 <div class="main_title">
-    <div class="text-center">
-        <img src="images/amavinos_logo.png" alt="Logo AMAVINOS">
-        <h1>AMAVINOS</h1>
-    </div>
-
 <h2 class="mb-3 text-white">Nuestras Próximas Catas de Vinos</h2>
 <p>
     ¡Bienvenidos a nuestra selección exclusiva de degustaciones enológicas! En este emocionante viaje enológico, te invitamos a explorar una variedad de sabores exquisitos y experiencias sensoriales únicas. Nuestros eventos de cata de vinos, organizados por Amavinos, te llevarán a un viaje español desde la comodidad de Sevilla hasta tu paladar. Desde catas de vinos de renombre hasta cenas temáticas preparadas por chefs de talla internacional, nuestras próximas degustaciones enológicas prometen deleitar tu paladar y enriquecer tu conocimiento vinícola. Únete a nosotros en este viaje enológico y sumérgete en un mundo de sabores inolvidables. ¡No te pierdas la oportunidad de ser parte de estas extraordinarias experiencias enológicas!
@@ -108,7 +106,7 @@
     <div class="col-lg-6 col-md-6">
         <div class="single_event position-relative">
             <div class="event_thumb">
-                
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 500px; height: 500px;" />
             </div>
             <div class="event_details">
                 <div class="d-flex mb-4">
