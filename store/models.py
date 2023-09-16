@@ -11,6 +11,8 @@ class Customer(models.Model):
 	def __str__(self):
 		return self.name
 	
+
+	
 	
 class Category(models.Model):
 	id = models.BigAutoField(primary_key=True)
@@ -27,7 +29,7 @@ class Product(models.Model):
 	digital = models.BooleanField(default=False,null=True, blank=True)
 	image = models.ImageField(null=True, blank=True)
 	category=models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-
+	description=models.CharField(max_length=200,null=True, blank=True)
 	def __str__(self):
 		return self.name
 
@@ -38,6 +40,16 @@ class Product(models.Model):
 		except:
 			url = ''
 		return url
+	
+
+class Cata(Product):
+    data = models.DateTimeField(),
+	duration= models.CharField(max_length=200)
+    
+	def __str__(self):
+    	return self.name
+
+
 
 class Order(models.Model):
 	id = models.BigAutoField(primary_key=True)

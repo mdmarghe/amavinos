@@ -10,6 +10,7 @@ def home(request):
 	return render(request,'store/homepage.html',{})
 
 
+
 def events(request):
     data = cartData(request)
     cartItems = data['cartItems']
@@ -21,6 +22,7 @@ def events(request):
 
     context = {'products': products, 'cartItems': cartItems}
     return render(request, 'store/provacatas.html', context)
+
 
 def store(request):
     data = cartData(request)

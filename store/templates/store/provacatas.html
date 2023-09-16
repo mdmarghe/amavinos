@@ -88,35 +88,36 @@
 <div class="events_area">
 <div class="container">
 <div class="row justify-content-center">
-<div class="col-lg-5">
+<div class="col-lg-12">
 <div class="main_title">
-<h2 class="mb-3 text-white">Upcoming Events</h2>
+<h2 class="mb-3 text-white">Nuestras Próximas Catas de Vinos</h2>
 <p>
-Replenish man have thing gathering lights yielding shall you
+    ¡Bienvenidos a nuestra selección exclusiva de degustaciones enológicas! En este emocionante viaje enológico, te invitamos a explorar una variedad de sabores exquisitos y experiencias sensoriales únicas. Nuestros eventos de cata de vinos, organizados por Amavinos, te llevarán a un viaje español desde la comodidad de Sevilla hasta tu paladar. Desde catas de vinos de renombre hasta cenas temáticas preparadas por chefs de talla internacional, nuestras próximas degustaciones enológicas prometen deleitar tu paladar y enriquecer tu conocimiento vinícola. Únete a nosotros en este viaje enológico y sumérgete en un mundo de sabores inolvidables. ¡No te pierdas la oportunidad de ser parte de estas extraordinarias experiencias enológicas!
 </p>
 </div>
 </div>
 </div>
 <div class="row">
-<div class="col-lg-6 col-md-6">
-<div class="single_event position-relative">
-<div class="event_thumb">
-<img src="https://www.bootdey.com/image/500x500/20B2AA/000000" alt />
-</div>
-<div class="event_details">
-<div class="d-flex mb-4">
-<div class="date"><span>15</span> Jun</div>
-<div class="time-location">
-<p><span class="ti-time mr-2"></span> 12:00 AM - 12:30 AM</p>
-<p><span class="ti-location-pin mr-2"></span> C. Antillano Campos 5</p>
-</div>
-</div>
-<p>
-Una cata de vino
-</p>
-<a href="#" class="btn btn-primary rounded-0 mt-3">View Details</a>
-</div>
-</div>
+    {% for product in products %}
+    <div class="col-lg-6 col-md-6">
+        <div class="single_event position-relative">
+            <div class="event_thumb">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+            </div>
+            <div class="event_details">
+                <div class="d-flex mb-4">
+                    <div class="date"><span>{{ product.date.day }}</span> {{ product.date|date:"M" }}</div>
+                    <div class="time-location">
+                        <p><span class="ti-time mr-2"></span> {{ product.date|time:"h:i A" }}</p>
+                        <p><span class="ti-location-pin mr-2"></span> {{ product.location }}</p>
+                    </div>
+                </div>
+                <p>{{ product.description }}</p>
+                <a href="#" class="btn btn-primary rounded-0 mt-3">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 <div class="col-lg-6 col-md-6">
 <div class="single_event position-relative">
@@ -140,7 +141,7 @@ One make creepeth man for so bearing their firmament won't fowl meat over seas g
 </div>
 <div class="col-lg-12">
 <div class="text-center pt-lg-5 pt-3">
-<a href="#" class="event-link"> View All Event <img src="img/next.png" alt /> </a>
+<a href="#" class="event-link"> Ver todos los eventos.<img src="img/next.png" alt /> </a>
 </div>
 </div>
 </div>
