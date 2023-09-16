@@ -43,11 +43,9 @@ class Product(models.Model):
 	
 
 class Cata(Product):
-    data = models.DateTimeField(),
-	duration= models.CharField(max_length=200)
-    
-	def __str__(self):
-    	return self.name
+	date=models.DateTimeField()
+	duration=models.CharField(max_length=50, default='2 horas')
+	location=models.CharField(max_length=50, default='Calle Antillano Campos, 5')
 
 
 

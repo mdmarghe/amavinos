@@ -18,7 +18,7 @@ def events(request):
     items = data['items']
 
     # Filtra i prodotti della categoria "Degustazioni di vini"
-    products = Product.objects.filter(category__name='Cata de Vino')
+    products = Cata.objects.all()
 
     context = {'products': products, 'cartItems': cartItems}
     return render(request, 'store/provacatas.html', context)
