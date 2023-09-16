@@ -1,4 +1,6 @@
-{%load static%}
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,7 +91,9 @@
 <div class="events_area">
 <div class="container">
     <div class="row justify-content-center">   
-    <img src="images/amavinos_logo.png" alt="Logo AMAVINOS">
+        <a href="../">
+            <img src="images/amavinos_logo.png" alt="Logo AMAVINOS">
+        </a>
     </div>
 <div class="row justify-content-center">    
 <div class="col-lg-12">
@@ -139,3 +143,4 @@
 </script>
 </body>
 </html>
+{% endblock content %}
