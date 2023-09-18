@@ -26,6 +26,7 @@ class Category(models.Model):
 class Product(models.Model):
 	id = models.BigAutoField(primary_key=True)
 	name = models.CharField(max_length=200)
+	slug=models.SlugField(blank=True)
 	price = models.FloatField()
 	digital = models.BooleanField(default=False,null=True, blank=True)
 	image = models.ImageField(null=True, blank=True)
@@ -45,6 +46,11 @@ class Product(models.Model):
 			url = ''
 		return url
 	
+	def save(self, *args, **kwargs):
+        # Genera la slug dal campo 'name' se non è già presente
+		if not self.slug:
+			self.slug = slugify(self.name)
+		super(Product, self).save(*args, **kwargs)
 
 class Cata(Product):
 	date=models.DateTimeField()
