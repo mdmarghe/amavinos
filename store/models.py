@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User 
+from django.utils.text import slugify
 
 
 class Customer(models.Model):
@@ -46,6 +47,12 @@ class Cata(Product):
 	date=models.DateTimeField()
 	duration=models.CharField(max_length=50, default='2 horas')
 	location=models.CharField(max_length=50, default='Calle Antillano Campos, 5')
+	slug = models.SlugField(unique=True)  # Campo per la slug
+
+	def save(self, *args, **kwargs):
+			# Genera la slug dal titolo e assegna al campo 'slug'
+			self.slug = slugify(self.title)
+			super(Cata, self).save(*args, **kwargs)
 
 
 

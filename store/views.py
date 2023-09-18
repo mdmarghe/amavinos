@@ -6,22 +6,35 @@ from .models import *
 from .utils import cookieCart, cartData, guestOrder
 
 
+
+
+
 def home(request):
 	return render(request,'store/homepage.html',{})
 
-
-
 def events(request):
-    data = cartData(request)
-    cartItems = data['cartItems']
-    order = data['order']
-    items = data['items']
+		data = cartData(request)
+		cartItems = data['cartItems']
+		order = data['order']
+		items = data['items']
+		oggi=datetime.date.today()
+		# Filtra i prodotti della categoria "Degustazioni di vini"
+		products = Cata.objects.all().filter(date__gte=oggi).order_by('date')
 
-    # Filtra i prodotti della categoria "Degustazioni di vini"
-    products = Cata.objects.all()
+		context = {'products': products, 'cartItems': cartItems}
+		return render(request, 'store/events_catas.html', context)
 
-    context = {'products': products, 'cartItems': cartItems}
-    return render(request, 'store/provacatas.html', context)
+def first_events(request):
+		data = cartData(request)
+		cartItems = data['cartItems']
+		order = data['order']
+		items = data['items']
+		oggi=datetime.date.today()
+		
+		
+		products = Cata.objects.filter(date__gte=oggi).order_by('date')[:2]
+		context = {'products': products, 'cartItems': cartItems}
+		return render(request, 'store/provacatas.html', context)
 
 
 def store(request):
