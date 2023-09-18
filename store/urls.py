@@ -7,7 +7,9 @@ urlpatterns = [
 	path('', views.home, name="homepage"),
 	path('tienda-de-vinos/', views.store, name="store"),
     path('cata-de-vinos/', views.first_events, name="first_events"),
+    path('cata-de-vinos/detail', views.events, name="events"),
     path('catas-de-vinos/', views.events, name="events"),
+    path('catas-de-vinos/detail', views.event_detail, name='event_detail'),   #devo capire come mettere l'evento giusto
 	path('cart/', views.cart, name="cart"),
 	path('checkout/', views.checkout, name="checkout"),
 

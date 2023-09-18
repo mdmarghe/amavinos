@@ -30,7 +30,10 @@ class Product(models.Model):
 	digital = models.BooleanField(default=False,null=True, blank=True)
 	image = models.ImageField(null=True, blank=True)
 	category=models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-	description=models.CharField(max_length=200,null=True, blank=True)
+	description=models.CharField(max_length=400,null=True, blank=True)
+	
+
+
 	def __str__(self):
 		return self.name
 
@@ -47,13 +50,7 @@ class Cata(Product):
 	date=models.DateTimeField()
 	duration=models.CharField(max_length=50, default='2 horas')
 	location=models.CharField(max_length=50, default='Calle Antillano Campos, 5')
-	slug = models.SlugField(unique=True)  # Campo per la slug
-
-	def save(self, *args, **kwargs):
-			# Genera la slug dal titolo e assegna al campo 'slug'
-			self.slug = slugify(self.title)
-			super(Cata, self).save(*args, **kwargs)
-
+	
 
 
 class Order(models.Model):

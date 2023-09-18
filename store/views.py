@@ -24,6 +24,8 @@ def events(request):
 		context = {'products': products, 'cartItems': cartItems}
 		return render(request, 'store/events_catas.html', context)
 
+
+
 def first_events(request):
 		data = cartData(request)
 		cartItems = data['cartItems']
@@ -36,6 +38,21 @@ def first_events(request):
 		context = {'products': products, 'cartItems': cartItems}
 		return render(request, 'store/provacatas.html', context)
 
+"""
+def event_detail(request, name):
+    # Genera la slug a partire dal campo 'name'
+    slug = slugify(name)
+    
+    # Cerca l'oggetto 'Cata' utilizzando la slug generata
+    cata = get_object_or_404(Cata, slug=slug)
+    
+    # Puoi aggiungere altre logiche qui se necessario
+    return render(request, 'event_detail.html', {'cata': cata})"""
+
+def event_detail(request):
+		
+		context={}
+		return render(request, 'store/event_detail.html', context)
 
 def store(request):
     data = cartData(request)
