@@ -12,6 +12,7 @@ urlpatterns = [
     path('<slug:slug>/', views.event_detail, name='event_detail'),   #devo capire come mettere l'evento giusto
 	path('cart/', views.cart, name="cart"),
 	path('checkout/', views.checkout, name="checkout"),
+    path('<slug:slug>/', views.product_detail, name="product_detail"),
 
 	path('update_item/', views.updateItem, name="update_item"),
 	path('process_order/', views.processOrder, name="process_order"),

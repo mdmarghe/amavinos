@@ -58,6 +58,13 @@ def store(request):
     return render(request, 'store/store.html', context)
 
 
+def product_detail(request,slug):
+    #return HttpResponse(slug)
+    product=Vino.objects.all().get(slug=slug)
+    context={'product':product}
+    return render(request, 'store/product_detail.html', context)
+
+
 def cart(request):
 	data = cartData(request)
 
