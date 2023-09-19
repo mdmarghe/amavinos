@@ -51,11 +51,16 @@ class Product(models.Model):
 		if not self.slug:
 			self.slug = slugify(self.name)
 		super(Product, self).save(*args, **kwargs)
+	
+	def snippet(self):
+		return self.description[:50]+'...'
+    
 
 class Cata(Product):
 	date=models.DateTimeField()
 	duration=models.CharField(max_length=50, default='2 horas')
 	location=models.CharField(max_length=50, default='Calle Antillano Campos, 5')
+
 
 
 class Vino(Product):
