@@ -61,3 +61,8 @@ function addCookieItem(productId, action){
 	
 	location.reload()
 }
+
+var cartTotalElement = document.getElementById('cart-total');
+if (cartTotalElement) {
+    cartTotalElement.textContent = cartItems;
+}
