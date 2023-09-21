@@ -33,13 +33,28 @@
                         <p class="lead">{{product.description}}</p>
                         <div class="d-flex">
                             <p class="quantity">{{item.quantity}}</p>
-						    <div class="quantity">
-							    <img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
-                                <input class="form-control text-center me-1" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                                <img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
-						    </div>
-                            <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Reserva</button>
-                                <i class="bi-cart-fill me-1"></i>
+                            
+                            <div class="quantity">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+                            
+                                        <img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+                                    
+                                    </div>
+                                    <div class="col-3">
+                                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem; vertical-align: middle;" />
+                                    </div>
+                                    <div class="col-3">
+                                        <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Reserva</button>
+                                        
+                                    </div>
+                                    <div class="col-2">
+                                      
+                                    </div>
+                                </div>  
+                            </div>     
+                                
                         </div>
                     </div>
                 </div>
