@@ -39,17 +39,17 @@ def first_events(request):
 		return render(request, 'store/provacatas.html', context)
 
 def event_detail(request, slug):
-    product = get_object_or_404(Cata, slug=slug)
-    context = {'product': product}
-    return render(request, 'store/event_detail.html', context)
+	data=cartData(request)
+	cartItems = data['cartItems']
+	order = data['order']
+	items = data['items']
+
+	product = get_object_or_404(Cata, slug=slug)
+	context = {'product': product, 'cartItems': cartItems}
+	return render(request, 'store/event_detail.html', context)
 
 
 
-"""def event_detail(request,slug):
-    #return HttpResponse(slug)
-    product=Cata.objects.all().get(slug=slug)
-    context={'product':product}
-    return render(request, 'store/event_detail.html', context)"""
 
 def store(request):
     data = cartData(request)
