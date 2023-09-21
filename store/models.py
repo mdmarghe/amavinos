@@ -27,11 +27,11 @@ class Product(models.Model):
 	id = models.BigAutoField(primary_key=True)
 	name = models.CharField(max_length=200)
 	slug=models.SlugField(blank=True)
-	price = models.FloatField()
+	price = models.IntegerField()
 	digital = models.BooleanField(default=False,null=True, blank=True)
 	image = models.ImageField(null=True, blank=True)
 	category=models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-	description=models.CharField(max_length=400,null=True, blank=True)
+	description=models.CharField(max_length=1000,null=True, blank=True)
 	
 
 
@@ -57,7 +57,7 @@ class Product(models.Model):
     
 
 class Cata(Product):
-	date=models.DateTimeField()
+	date=models.DateTimeField(null=True, blank=True)
 	duration=models.CharField(max_length=50, default='2 horas')
 	location=models.CharField(max_length=50, default='Calle Antillano Campos, 5')
 
