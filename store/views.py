@@ -175,7 +175,7 @@ class SuccessView(TemplateView):
 class CancelView(TemplateView):
     template_name = "cancel.html"
 
-class ProductLandingPageView(TemplateView):
+class ProductLandingPageView(View):
     template_name = "landing.html"
 
     def get_context_data(self, **kwargs):
