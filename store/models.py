@@ -55,8 +55,7 @@ class Product(models.Model):
 	def snippet(self):
 		return self.description[:50]+'...'
 	
-	def get_display_price(self):
-		return "{0:.2f}".format(self.price / 100)
+
     
 
 class Cata(Product):
@@ -115,7 +114,7 @@ class OrderItem(models.Model):
 
 	@property
 	def get_total(self):
-		total = self.product.price * self.quantity
+		total = self.product.price * self.quantity /100
 		return total
 
 class ShippingAddress(models.Model):
