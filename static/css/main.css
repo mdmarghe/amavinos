@@ -112,9 +112,3 @@ h1,h2,h3,h4,h5,h6{
     justify-content: center; /* Center vertically */
     align-items: center; /* Center vertically */
 }
-
-.card .card-img-top {
-    height: 100%; /* Take the full height of the card */
-    width: auto; /* Automatically adjust width to maintain aspect ratio */
-    object-fit: contain; /* Maintain aspect ratio and fit image within the card */
-}

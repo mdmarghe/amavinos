@@ -2,9 +2,23 @@
 {% load static %}
 {% block content %}
 	<div class="row">
+		<style>
+			.card {
+				margin: 4px; /* Adjust the value as needed */
+			}
+			.reshaped-image {
+				height:300px;
+				/* Set the maximum height */
+				width: auto; /* Automatically adjust the width to maintain aspect ratio */
+				object-fit: contain; 
+			}
+			.card-body {
+				padding: 10px; /* Adjust the value as needed */
+			}
+		</style>
 		{% for product in products %}
-		<div class="card col-lg-3 col-md-4 col-sm-6">
-			<img src="{{product.imageURL}}" class="card-img-top" alt="{{product.name}}">
+		<div class="card col-lg-3 col-md-4 col-sm-6 col-6">
+			<img  src="{{product.imageURL}}" class="reshaped-image card-img-top" alt="{{product.name}}">
 			<div class="card-body">
 			  <h5 class="card-title">{{product.name}}</h5>
 			  <p class="card-text">€{{product.price}}</p>
