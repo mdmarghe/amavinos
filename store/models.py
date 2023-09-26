@@ -74,6 +74,12 @@ class Vino(Product):
 	denomination=models.CharField(max_length=100,blank=True)
 	crianza=models.CharField(max_length=100,blank=True)
 	tipo=models.CharField(max_length=100,blank=True)
+
+	def is_denominated(self):
+		if self.denomination:
+			return self.denomination
+		else:
+			return '-'
 	
 
 
