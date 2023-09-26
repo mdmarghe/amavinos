@@ -3,17 +3,15 @@
 {% block content %}
 	<div class="row">
 		{% for product in products %}
-		<div class="col-lg-3 col-md-4 col-sm-6">
-			<img class="thumbnail" src="{{product.imageURL}}">
-			<div class="box-element product">
-				<h6><strong>{{product.name}}</strong></h6>
-				<hr>
-
-				<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-				
-				<a class="btn btn-outline-success" href="{%url 'product_detail' product.slug %}">View</a>
-				<h4 style="display: inline-block; float: right"><strong>€{{product.price}}</strong></h4>
-
+		<div class="card col-lg-3 col-md-4 col-sm-6">
+			<img src="{{product.imageURL}}" class="card-img-top" alt="{{product.name}}">
+			<div class="card-body">
+			  <h5 class="card-title">{{product.name}}</h5>
+			  <p class="card-text">€{{product.price}}</p>
+			  <p class="card-text">{{product.snippet}}</p>
+			  <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+			  <a class="btn btn-outline-success" href="{%url 'product_detail' product.slug %}">View</a>
+			  
 			</div>
 		</div>
 		{% endfor %}

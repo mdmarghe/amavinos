@@ -53,7 +53,10 @@ class Product(models.Model):
 		super(Product, self).save(*args, **kwargs)
 	
 	def snippet(self):
-		return self.description[:50]+'...'
+		if self.description:
+			return self.description[:50] + '...'
+		else:
+			return 'No description available'
 	
 
     
