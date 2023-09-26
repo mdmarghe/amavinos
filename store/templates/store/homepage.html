@@ -1,4 +1,4 @@
-{% load static %}
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,30 +12,74 @@
             padding: 0;
             font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
         }
         
         /* Style for the logo */
         .logo {
-            max-width: 20%;
-            max-height: 20%;
-            display: block;
-            margin: 0 auto;
-            transition: transform 0.2s; /* Add a transition for smooth scaling */
-        }
+			max-width: 300px; /* Set a fixed max-width in pixels */
+			max-height: 250px; /* Set a fixed max-height in pixels */
+			display: block;
+			margin: 0 auto;
+			transition: transform 0.2s;
+}
 
         /* Scale up the logo on hover */
         .logo:hover {
-            transform: scale(1.2); /* Increase the size to 120% on hover */
+            transform: scale(1.2);
         }
+
+        /* Style for the "Catas" link */
+        .catas-link {
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+        }
+		/* Style for the navigation bar */
+		.navbar {
+			background-color: transparent; /* Set the background color to transparent */
+			padding: 10px 0; /* Add padding for spacing */
+		}
+
+		/* Style for the navigation items */
+		.navbar li {
+			display: inline;
+			margin-right: 20px;
+		}
+
+		.navbar a {
+			text-decoration: none;
+			color: #000000; /* Default text color */
+			font-weight: bold;
+			transition: transform 0.2s; /* Smooth transform transition on hover */
+		}
+
+		/* Hover effect for navigation links */
+		/* Hover effect for navigation links */
+		.navbar a:hover {
+			transform: scale(1.2); /* Scale up by 20% on hover */
+		}
     </style>
 </head>
 <body>
-    <!-- Logo with hover effect -->
+    <!-- Clickable Logo with hover effect -->
     <a href="{% url 'store' %}">
         <img src="{% static 'images/amavinos_logo.png' %}" alt="Logo_amavinos" class="logo">
     </a>
+
+
+    <!-- Navigation bar -->
+		<nav class="navbar">
+			<ul>
+				<li><a href="{% url 'store' %}" class="store-link">Store</a></li>
+				<li><a href="{% url 'contacts' %}">Contactos</a></li>
+				<!-- Include the "Catas de vinos" link as a list item within the navbar -->
+				<li><a href="{% url 'events' %}" class="catas-link">Catas de vinos</a></li>
+				<!-- Add more navigation items as needed -->
+			</ul>
+		</nav>
 </body>
 </html>

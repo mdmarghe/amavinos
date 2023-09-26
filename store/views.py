@@ -219,3 +219,9 @@ class CreateCheckoutSessionView(View):
         return JsonResponse({
             'id': checkout_session.id
         })
+
+
+
+
+def contacts(request):
+    return render(request, 'store/contacts.html')
