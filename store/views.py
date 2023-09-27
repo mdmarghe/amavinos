@@ -160,7 +160,8 @@ def processOrder(request):
 
 
 
-
+def SearchResultsView(request):
+    return render(request,'store/search_results.html',{})
 
 
 
