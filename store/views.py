@@ -165,7 +165,7 @@ def search_results(request):
     # Implement your search logic here using the 'query' parameter
     # For example, you can filter products based on the query and pass them to the template
     products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
-    return render(request, 'search_results.html', {'products': products})
+    return render(request, 'store/search_results.html', {'products': products})
 
 
 
