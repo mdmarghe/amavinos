@@ -1,15 +1,10 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
-
+<!-- intro here -->
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-			<!-- Add the search form here -->
-			<form action="{% url 'search_results' %}" method="GET">
-                <input type="text" name="q" placeholder="Search products...">
-                <button type="submit">Search</button>
-            </form>
 
 			<!-- Add intro form here -->
             <h2>Bienvenido a Nuestra Tienda de Vinos</h2>
@@ -23,6 +18,8 @@
 </div>
 
 
+
+<!-- show products-->
 	<div class="row">
 		<style>
 			.card {
