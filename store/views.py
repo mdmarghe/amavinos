@@ -225,3 +225,11 @@ class CreateCheckoutSessionView(View):
 
 def contacts(request):
     return render(request, 'store/contacts.html')
+
+
+def search_results(request):
+    query = request.GET.get('q')
+    # Implement your search logic here using the 'query' parameter
+    # For example, you can filter products based on the query and pass them to the template
+    products = Product.objects.filter(name__icontains=query)
+    return render(request, 'search_results.html', {'products': products})

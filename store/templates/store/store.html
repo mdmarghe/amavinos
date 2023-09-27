@@ -1,6 +1,28 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+			<!-- Add the search form here -->
+			<form action="{% url 'search_results' %}" method="GET">
+                <input type="text" name="q" placeholder="Search products...">
+                <button type="submit">Search</button>
+            </form>
+
+			<!-- Add intro form here -->
+            <h2>Bienvenido a Nuestra Tienda de Vinos</h2>
+            <p>¡Bienvenidos a nuestra Tienda de Vinos en Sevilla! Aquí podrán embarcarse en un fascinante viaje por toda España con tan solo un sorbo. Nuestra selección de vinos españoles los llevará a través de las regiones vinícolas más icónicas, brindándoles la oportunidad de descubrir los sabores auténticos de este hermoso país. Ya sea que prefieran comprar en línea o visitarnos en nuestro establecimiento físico, estamos comprometidos a brindarles la mejor experiencia posible.
+
+				En nuestra tienda, pueden degustar una variedad de vinos y recibir asesoramiento de nuestros expertos enológicos. Ofrecemos vinos tintos, blancos y dulces de las prestigiosas Denominaciones de Origen de toda España, como Rioja, Ribera del Duero, Priorat y más. Además, proporcionamos un servicio de envío rápido y seguro para que puedan disfrutar de sus vinos favoritos en la comodidad de su hogar.
+				
+				En nuestra Tienda de Vinos en Sevilla, estamos orgullosos de ser su puerta de entrada al apasionante mundo del vino español. ¡Esperamos verlos pronto y compartir esta experiencia única con ustedes!</p>
+        </div>
+    </div>
+</div>
+
+
 	<div class="row">
 		<style>
 			.card {
