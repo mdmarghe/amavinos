@@ -57,6 +57,9 @@ class Product(models.Model):
 			return self.description[:50] + '...'
 		else:
 			return 'No description available'
+		
+	def display_price(self):
+		return "€{:.2f}".format(self.price/100.0)
 	
 
     
