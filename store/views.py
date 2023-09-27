@@ -160,8 +160,8 @@ def processOrder(request):
 	return JsonResponse('Payment submitted..', safe=False)
 
 
-def search_results(request,self):
-    query = self.request.GET.get("q")
+def search_results(request):
+    query = request.GET.get("q")
     # Implement your search logic here using the 'query' parameter
     # For example, you can filter products based on the query and pass them to the template
     products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))

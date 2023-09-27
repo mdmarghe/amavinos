@@ -5,91 +5,77 @@
 	<title>AMAVINOS</title>
 	<style>
 		@charset "UTF-8";
+		body, html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			width: 100%;
+			background-color: white;
+		}
 
-		  body,html {
-		  margin: 0;
-		  padding:0;
-		  height: 100%;
-		  width: 100%;
-		  background-color: white;
-		  }
+		.search-bar {
+			margin: 5px;
+			padding: 0;
+			height: 50px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			top: 50%;
+			left: 50%;
+			position: absolute;
+			transform: translate(-50%, -50%);
+			transition-duration: 0.2s;
+		}
 
-		  .search-bar {
-		  margin-right: 15px;
-		  margin:0;
-		  padding:0;
-		  height: 50px;
-		  display: flex;
-		  align-items: center;
-		  justify-content: center;
-		  top:50%;
-		  left:50%;
-		  position: absolute;
-		  transform: translate(-50%,-50%);
-		  border: 5px black solid;
-		  transition-duration: 0.2s;
-		  }
+		.textbox {
+			width: 0px;
+			padding: 0;
+			margin: 0;
+			border: none;
+			line-height: 40px;
+			font-size: 25px;
+			height: 45px;
+			background-color: transparent;
+			outline: none;
+			height: 100%;
+			float: left;
+			transition-duration: 0.05s;
+		}
 
-		  .textbox {
-		  width: 0px;
-		  padding: 0;
-		  margin: 0;
-		  border: none;
-		  line-height: 40px;
-		  font-size: 25px;
-		  height:45px;
-		  background-color: transparent;
-		  outline: none;
-		  height: 100%;
-		  float: left;
+		.search-btn {
+			background-color: transparent;
+			padding: 0px;
+			margin: 0;
+			height: 45px;
+			width: 45px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			float: right;
+			text-decoration: none;
+			height: 100%;
+			transition-duration: 0.2s;
+		}
 
-		  transition-duration: 0.05s;
-		  }
+		.search-bar:hover > .textbox {
+			padding: 0px 10px 0px 10px;
+			width: 100%;
+			transition-duration: 0.5s;
+		}
 
-		  .search-btn {
-		  background-color: transparent;
-		  padding: 0px 0px 0px 0px;
-		  margin: 0;
-		  height: 45px;
-		  width: 45px;
-		  display: flex;
-		  justify-content: center;
-		  align-items: center;
-		  float: right;
-		  text-decoration: none;
-		  /* border-left: 5px black solid; */
-		  height: 100%;
-		  transition-duration: 0.2s;
-		  }
+		.search-bar:hover > .search-btn {
+			transition-duration: 0.2s;
+		}
 
-		  .search-btn p {
-		  margin: 10px;
-		  color: black;
-		  font-size: 20px;
-		  font-family: sans-serif;
-		  font-weight: 800;
-		  }
+		.search-btn:hover {
+			background-color: black;
+			transition-duration: 0.2s;
+		}
 
-		  .search-bar:hover > .textbox {
-		  padding: 0px 10px 0px 10px;
-		  width: 100%;
-		  transition-duration: 0.2s;
-		  }
-
-		  .search-bar:hover > .search-btn {
-		  border-left: 5px black solid;
-		  transition-duration: 0.2s;
-		  }
-
-		  .search-btn:hover {
-		  background-color: black;
-		  transition-duration: 0.2s;
-		  }
-		  .search-btn:hover > p {
-		  color: white;
-		  transition-duration: 0.2s;
-		  }
-
+		.search-btn:hover > p {
+			color: white;
+			transition-duration: 0.2s;
+		}
 	</style>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
@@ -180,12 +166,13 @@
 			<!-- search-bar-->
 
 			<div class="search-bar">
-				<input type="text" class="textbox" placeholder="Type here..." />
-				<a class="search-btn" href="{% url 'search_results' %}">
-					<p>&#x1F50E</p>
-				</a>
+				<form action="{% url 'search_results' %}" method="get">
+					<div class="search-bar">
+					  <input name="q" type="text" placeholder="Search...">
+					  <button class="search-button">&#x1F50E</button>
+					</div>
+				  </form>
 			</div>
-		
 			  
 			<!-- Login button -->
 			<a href="#" class="btn btn-warning">Login</a>
