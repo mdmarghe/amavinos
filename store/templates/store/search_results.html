@@ -1,10 +1,14 @@
-
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
 <h1>Search Results</h1>
 
-<ul>
-  {% for city in object_list %}
-    <li>
-      {{ city.name }}, {{ city.state }}
-    </li>
-  {% endfor %}
-</ul>
+{% for product in products %}
+    <div class="product">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <!-- Add more details here as needed -->
+    </div>
+{% empty %}
+    <p>No products found.</p>
+{% endfor %}
