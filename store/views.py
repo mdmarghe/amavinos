@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 import json
 import datetime
@@ -171,23 +172,24 @@ def search_results(request):
 
 
 
+
 def contacts(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
+            # Process the form and send the email
 
-            # Send email
-            subject = f'Asunto: {subject}' 
-            message = f'Nombre y Apellido : {name}\nCorreo: {email}\nMessage: {message}'
-            from_email = 'your_email@example.com'  # Your email address
-            recipient_list = ['admin@amavinos.com','margheritanuccio98@gmail.com']  # Recipient's email address
+            # Send a confirmation email to the user
+            user_email = form.cleaned_data['email']
+            subject = 'Confirmation: Your Message Has Been Received'
+            message = 'Thank you for your message. We have received it successfully.'
+            from_email = 'margheritanuccio98@gmail.com'  # Your email address
+            recipient_list = [user_email]
 
             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
-            return redirect('success')  # Redirect to a success page
+            # After sending the email, redirect to the confirmation page
+            return render(request, 'store/confirmation.html')
     else:
         form = ContactForm()
 
