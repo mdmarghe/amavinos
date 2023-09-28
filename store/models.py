@@ -38,8 +38,6 @@ class Product(models.Model):
 	category=models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
 	description=models.CharField(max_length=1000,null=True, blank=True)
 	
-
-
 	def __str__(self):
 		return self.name
 
@@ -65,6 +63,10 @@ class Product(models.Model):
 		
 	def display_price(self):
 		return "€{:.2f}".format(self.price/100.0)
+	
+	def display_count(self):
+		
+		return 
 	
 
     
