@@ -63,29 +63,31 @@ def event_detail(request, slug):
 
 
 def store(request):
-    data = cartData(request)
-    cartItems = data['cartItems']
-    order = data['order']
-    items = data['items']
+	data = cartData(request)
+	cartItems = data['cartItems']
+	order = data['order']
+	items = data['items']
 
-    # Filtra i prodotti della categoria "Vini"
-    products = Product.objects.filter(category__id=2)
+	# Filtra i prodotti della categoria "Vini"
+	products = Product.objects.filter(category__id=2)
+	unique_tipos = Product.objects.values('tipo').distinct()
 
-    context = {'products': products, 'cartItems': cartItems}
-    return render(request, 'store/store.html', context)
+
+	context = {'products': products, 'cartItems': cartItems}
+	return render(request, 'store/store.html', context)
 
 
 def product_detail(request, slug):
-    data = cartData(request)
-    cartItems = data['cartItems']
-    order = data['order']
-    items = data['items']
+	data = cartData(request)
+	cartItems = data['cartItems']	
+	order = data['order']
+	items = data['items']
 
     # Filtra i prodotti della categoria "Vini"
     
-    product = get_object_or_404(Vino, slug=slug)
-    context = {'product': product, 'cartItems': cartItems}
-    return render(request, 'store/product_detail.html', context)
+	product = get_object_or_404(Vino, slug=slug)
+	context = {'product': product, 'cartItems': cartItems}
+	return render(request, 'store/product_detail.html', context)
 
 
 def cart(request):
