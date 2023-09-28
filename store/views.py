@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 import json
 import datetime
@@ -9,6 +9,7 @@ from django.conf import settings
 from django.views import View
 from django.views.generic import TemplateView
 from django.db.models import Q
+from django.core.mail import send_mail
 
 
 
@@ -170,6 +171,28 @@ def search_results(request):
 
 
 
+def contacts(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+
+            # Send email
+            subject = f'Asunto: {subject}' 
+            message = f'Nombre y Apellido : {name}\nCorreo: {email}\nMessage: {message}'
+            from_email = 'your_email@example.com'  # Your email address
+            recipient_list = ['admin@amavinos.com','margheritanuccio98@gmail.com']  # Recipient's email address
+
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
+            return redirect('success')  # Redirect to a success page
+    else:
+        form = ContactForm()
+
+    return render(request, 'store/contacts.html', {'form': form})
+
 
 
 #checkout session
@@ -230,8 +253,5 @@ class CreateCheckoutSessionView(View):
 
 
 
-
-def contacts(request):
-    return render(request, 'store/contacts.html')
 
 

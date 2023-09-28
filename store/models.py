@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User 
 from django.utils.text import slugify
+from django import forms
+
+
+
+
 
 
 class Customer(models.Model):
@@ -141,3 +146,11 @@ class ShippingAddress(models.Model):
 
 	def __str__(self):
 		return self.address
+	
+
+
+class ContactForm(forms.Form):
+	name = forms.CharField(max_length=100)
+	email = forms.EmailField()
+	subject=forms.CharField(max_length=200)  
+	message = forms.CharField(widget=forms.Textarea)
