@@ -121,6 +121,15 @@ MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Set your SMTP server
+EMAIL_PORT = 587  # Set your SMTP port
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'margheritanuccio98@gmail.com'  # Your email address
+EMAIL_HOST_PASSWORD = 'vi piacerebbe.'  # Your email password
+
+
+
 STRIPE_PUBLIC_KEY = "pk_test_51NsCsaCT2FBzPU5gC9Efy3RFWmglhgnQyaI5hquOWdkNGjCcBDJlVqEtSwgT2aRTrVdsMKXIIbUEuV6NA522wOLc00TAVndeye"
 STRIPE_SECRET_KEY = "sk_test_51NsCsaCT2FBzPU5gdUdMg1ViBJ0UOwziWYlmBtGTbvXMpzQyV1y4j4HfgRKPMXQ1HkbDkuPjDMnN4gR47WTedVWf00EVQsr27A"
 STRIPE_WEBHOOK_SECRET = ""
