@@ -10,8 +10,9 @@ from django.conf import settings
 from ecommerce.config import EMAIL_HOST_USER
 from django.views import View
 from django.views.generic import TemplateView
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.core.mail import send_mail
+
 
 
 
@@ -68,12 +69,29 @@ def store(request):
 	order = data['order']
 	items = data['items']
 
+	products = Vino.objects.all()
+	tipos= (
+        Vino.objects
+        .values('tipo')
+        .annotate(count=Count('tipo'))
+    )
+
+	context = {'products': products, 'cartItems': cartItems, 'tipos':tipos}
+	return render(request, 'store/store.html', context)
+
+
+def filters(request, slug):
+	data = cartData(request)
+	cartItems = data['cartItems']
+	order = data['order']
+	items = data['items']
+
 	# Filtra i prodotti della categoria "Vini"
-	products = Product.objects.filter(category__id=2)
+	products =  get_object_or_404(Vino, tipo__iexact=slug)
 
 
 	context = {'products': products, 'cartItems': cartItems}
-	return render(request, 'store/store.html', context)
+	return render(request, 'store/product_filtered.html', context)
 
 
 def product_detail(request, slug):

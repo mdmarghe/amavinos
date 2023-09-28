@@ -89,6 +89,23 @@ class Vino(Product):
 		else:
 			return '-'
 	
+	def get_tipo(self):
+		if self.tipo:
+			return self.tipo
+		else:
+			return '-'
+		
+	def get_grapes(self):
+		if self.grapes:
+			return self.grapes
+		else:
+			return '-'
+		
+	def get_bodega(self):
+		if self.bodega:
+			return self.bodega
+		else:
+			return '-'
 
 
 class Order(models.Model):
