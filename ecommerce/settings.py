@@ -1,4 +1,5 @@
 import os
+from config import EMAIL_BACKEND, EMAIL_HOST, EMAIL_PORT, EMAIL_USE_TLS, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -121,12 +122,7 @@ MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Set your SMTP server
-EMAIL_PORT = 587  # Set your SMTP port
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'margheritanuccio98@gmail.com'  # Your email address
-EMAIL_HOST_PASSWORD = 'vi piacerebbe.'  # Your email password
+
 
 
 
