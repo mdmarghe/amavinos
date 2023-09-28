@@ -3,14 +3,38 @@
 {% block content %}
 <h1>Search Results</h1>
 
-{% for product in products %}
-    <div class="product">
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-        <!-- Add more details here as needed -->
+<div class="row">
+    <style>
+        .card {
+            margin: 4px; /* Adjust the value as needed */
+        }
+        .reshaped-image {
+            height:300px;
+            /* Set the maximum height */
+            width: auto; /* Automatically adjust the width to maintain aspect ratio */
+            object-fit: contain; 
+        }
+        .card-body {
+            padding: 20px; /* Adjust the value as needed */
+        }
+    </style>
+    {% for product in products %}
+    <div class="card col-lg-3 col-md-4 col-sm-6 col-9">
+        <img  src="{{product.imageURL}}" class="reshaped-image card-img-top" alt="{{product.name}}">
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <p class="card-text">{{product.display_price}}</p>
+          <p class="card-text">{{product.snippet}}</p>
+          <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+          <a class="btn btn-outline-success" href="{%url 'product_detail' product.slug %}">View</a>
+          
+        </div>
     </div>
-{% empty %}
+    {% empty %}
     <p>No products found.</p>
-{% endfor %}
+    {% endfor %}
+</div>
+
+
 
 {% endblock content %}
