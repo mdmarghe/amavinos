@@ -70,7 +70,6 @@ def store(request):
 
 	# Filtra i prodotti della categoria "Vini"
 	products = Product.objects.filter(category__id=2)
-	unique_tipos = Product.objects.values('tipo').distinct()
 
 
 	context = {'products': products, 'cartItems': cartItems}
