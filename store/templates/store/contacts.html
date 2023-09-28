@@ -13,15 +13,10 @@
 
         <!--Grid column-->
         <div class="col-md-9 mb-md-0 mb-5">
-            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-
-               
-                <!--Grid row-->
+            <form action="{% url 'contacts' %}" method="post">
                 {% csrf_token %}
-                 {{ form.as_p }}
-                 <div class="text-center text-md-left">
-                    <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
-                </div>
+                {{ form.as_p }}
+                <button type="submit">Send</button>
             </form>
 
            
