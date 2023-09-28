@@ -7,6 +7,7 @@ from .models import *
 from .utils import cookieCart, cartData, guestOrder
 import stripe
 from django.conf import settings
+from ecommerce.config import EMAIL_HOST_USER
 from django.views import View
 from django.views.generic import TemplateView
 from django.db.models import Q
@@ -183,8 +184,8 @@ def contacts(request):
             user_email = form.cleaned_data['email']
             subject = 'Confirmation: Your Message Has Been Received'
             message = 'Thank you for your message. We have received it successfully.'
-            from_email = 'margheritanuccio98@gmail.com'  # Your email address
-            recipient_list = [user_email]
+            from_email = EMAIL_HOST_USER # Your email address
+            recipient_list = [user_email,]
 
             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
