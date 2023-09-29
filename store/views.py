@@ -70,24 +70,20 @@ def store(request):
 	items = data['items']
 
 	products = Vino.objects.all()
-	tipos= (
-        Vino.objects
-        .values('tipo')
-        .annotate(count=Count('tipo'))
-    )
 
-	context = {'products': products, 'cartItems': cartItems, 'tipos':tipos}
+
+	context = {'products': products, 'cartItems': cartItems}
 	return render(request, 'store/store.html', context)
 
 
-def filters(request, slug):
+def filters(request, tipo):
 	data = cartData(request)
 	cartItems = data['cartItems']
 	order = data['order']
 	items = data['items']
 
 	# Filtra i prodotti della categoria "Vini"
-	products =  get_object_or_404(Vino, tipo__iexact=slug)
+	products =  get_object_or_404(Vino, tipo=tipo)
 
 
 	context = {'products': products, 'cartItems': cartItems}

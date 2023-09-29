@@ -15,7 +15,7 @@ urlpatterns = [
     path('contactenos/', views.contacts, name="contacts"),
     #path('checkout/', views.ProductLandingPageView.as_view(), name="checkout"),
     path('search/', views.search_results, name="search_results"),
-    path('tienda-de-vinos/<slug:slug>/', views.filters, name="filtered_results"),
+    path('tienda-de-vinos/<str:tipo>/', views.filters, name="filtered_results"),
 
     path('cancel/', views.CancelView.as_view(), name='cancel'),
     path('success/', views.SuccessView.as_view(), name='success'),
