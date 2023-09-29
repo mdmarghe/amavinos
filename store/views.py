@@ -196,26 +196,26 @@ def search_results(request):
 
 
 def contacts(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            # Process the form and send the email
-
-            # Send a confirmation email to the user
-            user_email = form.cleaned_data['email']
-            subject = 'Confirmation: Your Message Has Been Received'
-            message = 'Thank you for your message. We have received it successfully.'
-            from_email = EMAIL_HOST_USER # Your email address
-            recipient_list = [user_email,]
-
-            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+	data = cartData(request)
+	cartItems = data['cartItems']
+	order = data['order']
+	items = data['items']
+	if request.method == 'POST':
+		form = ContactForm(request.POST)
+		if form.is_valid():
+			user_email = form.cleaned_data['email']
+			subject = 'Confirmation: Your Message Has Been Received'
+			message = 'Thank you for your message. We have received it successfully.'
+			from_email = EMAIL_HOST_USER # Your email address
+			recipient_list = [user_email,]
+			send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
             # After sending the email, redirect to the confirmation page
-            return render(request, 'store/confirmation.html')
-    else:
-        form = ContactForm()
+		return render(request, 'store/confirmation.html')
+	else:
+		form = ContactForm()
 
-    return render(request, 'store/contacts.html', {'form': form})
+	return render(request, 'store/contacts.html', {'form': form})
 
 
 
