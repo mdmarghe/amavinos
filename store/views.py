@@ -79,7 +79,7 @@ def store(request):
 
 
 
-def filters(request):
+def filters(request, tipo ):
 	query = request.GET.get("q")
 	data = cartData(request)
 	cartItems = data['cartItems']
@@ -183,11 +183,13 @@ def processOrder(request):
 
 
 def search_results(request):
-    query = request.GET.get("q")
-    # Implement your search logic here using the 'query' parameter
-    # For example, you can filter products based on the query and pass them to the template
-    products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
-    return render(request, 'store/search_results.html', {'products': products})
+	data = cartData(request)
+	cartItems = data['cartItems']
+	order = data['order']
+	items = data['items']
+	query = request.GET.get("q")
+	products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+	return render(request, 'store/search_results.html', {'products': products, 'cartItems':cartItems})
 
 
 
