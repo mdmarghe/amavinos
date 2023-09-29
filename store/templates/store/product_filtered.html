@@ -1,6 +1,8 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
+<h1>Filtered Results</h1>
+
 <div class="row">
     <style>
         .card {
@@ -28,6 +30,11 @@
           
         </div>
     </div>
+    {% empty %}
+    <p>No products found.</p>
     {% endfor %}
 </div>
+
+
+
 {% endblock content %}
