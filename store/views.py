@@ -72,18 +72,22 @@ def store(request):
 	products = Vino.objects.all()
 
 
+
 	context = {'products': products, 'cartItems': cartItems}
 	return render(request, 'store/store.html', context)
 
 
-def filters(request, tipo):
+
+
+def filters(request):
+	query = request.GET.get("q")
 	data = cartData(request)
 	cartItems = data['cartItems']
 	order = data['order']
 	items = data['items']
 
 	# Filtra i prodotti della categoria "Vini"
-	products =  get_object_or_404(Vino, tipo=tipo)
+	products = Product.objects.filter(Q(tipo__icontains=query))
 
 
 	context = {'products': products, 'cartItems': cartItems}
