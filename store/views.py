@@ -63,30 +63,42 @@ def event_detail(request, slug):
 
 
 
+
 def store(request):
 	data = cartData(request)
 	cartItems = data['cartItems']
 	order = data['order']
 	items = data['items']
-
 	products = Vino.objects.all()
 
+	all_bodegas = Vino.objects.values_list('bodega', flat=True).distinct()
+	bodegas_list=list(all_bodegas)
+
+	all_tipos = Vino.objects.values_list('tipo', flat=True).distinct()
+	tipos_list=list(all_tipos)
 
 
-	context = {'products': products, 'cartItems': cartItems}
+	context = {'products': products, 'cartItems': cartItems, 'bodegas_list':bodegas_list, 'tipos_list':tipos_list}
 	return render(request, 'store/store.html', context)
 
 
+def search_results(request):
+	data = cartData(request)
+	cartItems = data['cartItems']
+	order = data['order']
+	items = data['items']
+	query = request.GET.get("q")
+	products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+	return render(request, 'store/search_results.html', {'products': products, 'cartItems':cartItems})
 
 
 def filters(request):
-	query = request.GET.get("q")
 	data = cartData(request)
 	cartItems = data['cartItems']
 	order = data['order']
 	items = data['items']
 
-	# Filtra i prodotti della categoria "Vini"
+	query = request.GET.get("q")
 	products = Product.objects.filter(Q(tipo__icontains=query))
 
 
@@ -182,14 +194,7 @@ def processOrder(request):
 	return JsonResponse('Payment submitted..', safe=False)
 
 
-def search_results(request):
-	data = cartData(request)
-	cartItems = data['cartItems']
-	order = data['order']
-	items = data['items']
-	query = request.GET.get("q")
-	products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
-	return render(request, 'store/search_results.html', {'products': products, 'cartItems':cartItems})
+
 
 
 

@@ -25,37 +25,35 @@
 					<div class="py-3">
 						<h5 class="font-weight-bold">Categories</h5>
 						<ul class="list-group">
+						<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
+							<form id="filterForm" action="{% url 'filtered_results' %}" method="get">
+								{%for tipo in tipos_list%}
 
+									<button name="q" class="filter-btn" type="submit">
+										
+											{{ tipo }}
+											<span class="badge badge-primary badge-pill">11</span>
+									</button>
+									
+								{% endfor %}
+								<!-- Add more buttons with different names as needed -->
+							</form>
+						</li>
 							
-							<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
-								<a href="{% url 'filtered_results' 'tinto' %}">Tinto</a>
-								<span class="badge badge-primary badge-pill">11</span>
-							</li>
-					
-
-							<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> <a href="{% url 'filtered_results' 'blanco' %}">Blanco</a>
-								 <span class="badge badge-primary badge-pill">112</span> 
-							</li>
-							<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> <a href="{% url 'filtered_results' 'rosado' %}">Rosados</a> <span class="badge badge-primary badge-pill">32</span> </li>
-							<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> <a href="{% url 'filtered_results' 'generoso' %}">Generosos </a><span class="badge badge-primary badge-pill">48</span> </li>
-							<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> <a href="{% url 'filtered_results' 'cava' %}">Cavas</a>
-								<span class="badge badge-primary badge-pill">112</span> 
-						   </li>
 						</ul>
 					</div>
 					<div class="py-3">
 						<h5 class="font-weight-bold">Bodegas</h5>
 						<form class="brand">
-							<div class="form-inline d-flex align-items-center py-1"> <label class="tick">Royal Fields <input type="checkbox"> <span class="check"></span> </label> </div>
-							<div class="form-inline d-flex align-items-center py-1"> <label class="tick">Crasmas Fields <input type="checkbox" checked> <span class="check"></span> </label> </div>
-							<div class="form-inline d-flex align-items-center py-1"> <label class="tick">Vegetarisma Farm <input type="checkbox" checked> <span class="check"></span> </label> </div>
-							<div class="form-inline d-flex align-items-center py-1"> <label class="tick">Farmar Field Eve <input type="checkbox"> <span class="check"></span> </label> </div>
-							<div class="form-inline d-flex align-items-center py-1"> <label class="tick">True Farmar Steve <input type="checkbox"> <span class="check"></span> </label> </div>
+							{%for bodega in bodegas_list%}
+							<div class="form-inline d-flex align-items-center py-1"> <label class="tick">{{bodega}} <input type="checkbox"> <span class="check"></span> </label> </div>
+							{%endfor%}
 						</form>
 					</div>
 					<div class="py-3">
 						<h5 class="font-weight-bold">Rating</h5>
 						<form class="rating">
+							
 							<div class="form-inline d-flex align-items-center py-2"> <label class="tick"><span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
 							<div class="form-inline d-flex align-items-center py-2"> <label class="tick"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
 							<div class="form-inline d-flex align-items-center py-2"> <label class="tick"><span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
