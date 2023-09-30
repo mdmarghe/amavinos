@@ -224,7 +224,7 @@ def contacts(request):
 
 
 
-#checkout session
+#Checkout session endpoint
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -250,35 +250,34 @@ class ProductLandingPageView(View):
 
 
 class CreateCheckoutSessionView(View):
-    def post(self, request, *args, **kwargs):
-        product_id = self.kwargs["pk"]
-        product = Product.objects.get(id=product_id)
-        YOUR_DOMAIN = "http://127.0.0.1:8000"
-        checkout_session = stripe.checkout.Session.create(
+	def post(self, request, *args, **kwargs):
+		YOUR_DOMAIN = "http://127.0.0.1:8000"
+		checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[
                 {
                     'price_data': {
                         'currency': 'eur',
-                        'unit_amount': product.price,
+                        'unit_amount': Product.price,
                         'product_data': {
-                            'name': product.name,
-                            # 'images': product.image,
+                            'name': Product.name,
+                            # 'images': ['https://i.imgur.com/EHyR2nP.png'],
                         },
                     },
                     'quantity': 1,
                 },
             ],
-            metadata={
-                "product_id": product.id
+			metadata={
+                "product_id": Product.id
             },
             mode='payment',
-            success_url=YOUR_DOMAIN + '/success/',
-            cancel_url=YOUR_DOMAIN + '/cancel/',
+            success_url=YOUR_DOMAIN + 'store/success/',
+            cancel_url=YOUR_DOMAIN + 'store/cancel/',
         )
-        return JsonResponse({
+		return JsonResponse({
             'id': checkout_session.id
         })
+
 
 
 

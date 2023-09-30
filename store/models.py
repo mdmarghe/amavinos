@@ -148,8 +148,8 @@ class OrderItem(models.Model):
 
 	@property
 	def get_total(self):
-		total = self.product.price * self.quantity /100
-		return total
+		total = self.product.price * self.quantity 
+		return total     
 
 class ShippingAddress(models.Model):
 	id = models.BigAutoField(primary_key=True)
