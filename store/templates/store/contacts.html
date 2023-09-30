@@ -11,18 +11,40 @@
 
     <div class="row">
 
-        <!--Grid column-->
+        <!-- Grid column -->
         <div class="col-md-9 mb-md-0 mb-5">
             <form action="{% url 'contacts' %}" method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Send</button>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="{{ form.email.id_for_label }}">Email:</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="{{ form.name.id_for_label }}">Name:</label>
+                        {{ form.name }}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.subject.id_for_label }}">Subject:</label>
+                    {{ form.subject }}
+                </div>
+        
+                <div class="form-group">
+                    <label for="{{ form.message.id_for_label }}">Message:</label>
+                    {{ form.message }}
+                </div>
+        
+                <!-- Add more form fields as needed -->
+        
+                <button type="submit" class="btn btn-primary">Send</button>
             </form>
-
-           
+        
             <div class="status"></div>
         </div>
-        <!--Grid column-->
+        
+
 
         <!--Grid column-->
         <div class="col-md-3 text-center">
@@ -39,12 +61,29 @@
                 <li><i class="fas fa-envelope mt-4 fa-2x"></i>
                     <p>admin@amavinos.com</p>
                 </li>
+                
             </ul>
         </div>
         <!--Grid column-->
-
+       
     </div>
+    <div>
+        <h2 class="h1-responsive font-weight-bold text-center my-4">Dónde nos puedes encontrar</h2>
+        <style>
+            .map-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 500px; /* Set your desired height */
+                margin: 20px 0; /* Optional: Add some margin for spacing */
+            }
 
+        </style>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170.191568554769!2d-6.0072556242108455!3d37.385301634499754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd126d5e399e30a5%3A0x2ff3f422e46958ce!2sAMAVINOS%20TRIANA%3A%20tienda%2C%20catas%20de%20vinos%20y%20abaceria!5e0!3m2!1sit!2ses!4v1696071917660!5m2!1sit!2ses" width="800" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        
+    </div>  
 </section>
 <!--Section: Contact v.2-->
 

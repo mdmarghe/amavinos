@@ -79,7 +79,7 @@ def store(request):
 
 
 
-def filters(request, tipo ):
+def filters(request):
 	query = request.GET.get("q")
 	data = cartData(request)
 	cartItems = data['cartItems']
