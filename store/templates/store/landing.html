@@ -178,6 +178,7 @@ button:disabled {
           <h5>${{ product.display_price }}</h5>
         </div>
       </div>
+
       <button type="button" id="checkout-button">Checkout</button>
       <hr />
       <h2>Checkout using custom payment flow</h2>
@@ -239,7 +240,7 @@ button:disabled {
         fontSmoothing: "antialiased",
         fontSize: "16px",
         "::placeholder": {
-          color: "#32325d"
+          color: '#b51a00'
         }
       },
       invalid: {
@@ -256,33 +257,28 @@ button:disabled {
       document.querySelector("button").disabled = event.empty;
       document.querySelector("#card-error").textContent = event.error ? event.error.message : "";
     });
-
-
-
-
-
     var form = document.getElementById("payment-form");
-    form.addEventListener("submit", function(event) {
-      event.preventDefault();
-      // Complete payment when the submit button is clicked
+      form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        // Complete payment when the submit button is clicked
 
-      fetch("{% url 'create-payment-intent' product.id %}", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          'X-CSRFToken': csrftoken
-        },
-        body: JSON.stringify({
-          email: document.getElementById('email').value
+        fetch("{% url 'create-payment-intent' product.id %}", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            'X-CSRFToken': csrftoken
+          },
+          body: JSON.stringify({
+            email: document.getElementById('email').value
+          })
         })
-      })
-        .then(function(result) {
-          return result.json();
-        })
-        .then(function(data) {
-          payWithCard(stripe, card, data.clientSecret);
-        });
-    });
+          .then(function(result) {
+            return result.json();
+          })
+          .then(function(data) {
+            payWithCard(stripe, card, data.clientSecret);
+          });
+      });
     
     // Calls stripe.confirmCardPayment
     // If the card requires authentication Stripe shows a pop-up modal to

@@ -336,6 +336,23 @@ def stripe_webhook(request):
             subject="Here is your product",
             message=f"Thanks for your purchase. Here is the product you ordered. The URL is {product.url}",
             recipient_list=[customer_email],
+            from_email="admin@amavinos.com"
+        )
+	elif event["type"] == "payment_intent.succeeded":
+		intent = event['data']['object']
+
+		stripe_customer_id = intent["customer"]
+		stripe_customer = stripe.Customer.retrieve(stripe_customer_id)
+
+		customer_email = stripe_customer['email']
+		product_id = intent["metadata"]["product_id"]
+
+		product = Product.objects.get(id=product_id)
+
+		send_mail(
+            subject="Here is your product",
+            message=f"Thanks for your purchase. Here is the product you ordered. The URL is {product.url}",
+            recipient_list=[customer_email],
             from_email="matt@test.com"
         )
 
@@ -356,7 +373,7 @@ class StripeIntentView(View):
             product = Product.objects.get(id=product_id)
             intent = stripe.PaymentIntent.create(
                 amount=product.price,
-                currency='usd',
+                currency='eur',
                 customer=customer['id'],
                 metadata={
                     "product_id": product.id
