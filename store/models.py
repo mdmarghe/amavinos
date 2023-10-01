@@ -37,6 +37,7 @@ class Product(models.Model):
 	image = models.ImageField(null=True, blank=True)
 	category=models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
 	description=models.CharField(max_length=1000,null=True, blank=True)
+	url = models.URLField(default='https://google.com/')
 	
 	def __str__(self):
 		return self.name

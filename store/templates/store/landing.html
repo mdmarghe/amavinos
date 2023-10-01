@@ -256,10 +256,16 @@ button:disabled {
       document.querySelector("button").disabled = event.empty;
       document.querySelector("#card-error").textContent = event.error ? event.error.message : "";
     });
+
+
+
+
+
     var form = document.getElementById("payment-form");
     form.addEventListener("submit", function(event) {
       event.preventDefault();
       // Complete payment when the submit button is clicked
+
       fetch("{% url 'create-payment-intent' product.id %}", {
         method: "POST",
         headers: {
@@ -334,6 +340,6 @@ button:disabled {
         document.querySelector("#button-text").classList.remove("hidden");
       }
     };
-
+    
   </script>
 </html>

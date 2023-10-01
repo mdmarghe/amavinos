@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.http import JsonResponse
 import json
 import datetime
@@ -9,6 +9,7 @@ import stripe
 from django.conf import settings
 from ecommerce.config import EMAIL_HOST_USER
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 from django.db.models import Q, Count
 from django.core.mail import send_mail
@@ -106,6 +107,7 @@ def filters(request):
 	return render(request, 'store/product_filtered.html', context)
 
 
+
 def product_detail(request, slug):
 	data = cartData(request)
 	cartItems = data['cartItems']	
@@ -116,7 +118,7 @@ def product_detail(request, slug):
     
 	product = get_object_or_404(Vino, slug=slug)
 	context = {'product': product, 'cartItems': cartItems}
-	return render(request, 'store/product_detail.html', context)
+	return render(request, 'store/product_detail_originale.html', context)
 
 
 def cart(request):
@@ -221,25 +223,14 @@ def contacts(request):
 		form = ContactForm()
 
 	return render(request, 'store/contacts.html', {'form': form})
-
-
-
-#Checkout session endpoint
-
+##STRIPE
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-class SuccessView(TemplateView):
-    template_name = "success.html"
-
-
-class CancelView(TemplateView):
-    template_name = "cancel.html"
-
-class ProductLandingPageView(View):
-    template_name = "landing.html"
+class ProductLandingPageView(TemplateView):
+    template_name = "store/landing.html"
 
     def get_context_data(self, **kwargs):
-        product = Product.objects.get(name="Test Product")
+        product = Product.objects.get(name="test")
         context = super(ProductLandingPageView, self).get_context_data(**kwargs)
         context.update({
             "product": product,
@@ -249,8 +240,39 @@ class ProductLandingPageView(View):
 
 
 
+#Checkout session endpoint
+
+
+
+class SuccessView(TemplateView):
+    template_name = "store/success.html"
+
+
+class CancelView(TemplateView):
+    template_name = "cancel.html"
+
+
+
+"""
+class product_detail(View):
+    template_name = "product_detail.html"
+
+    def get_context_data(self, **kwargs):
+        product = Product.objects.get(name="Test Product")
+        context = super(product_detail, self).get_context_data(**kwargs)
+        context.update({
+            "product": product,
+            "STRIPE_PUBLIC_KEY": settings.STRIPE_PUBLIC_KEY
+        })
+        return context"""
+
+
+
 class CreateCheckoutSessionView(View):
 	def post(self, request, *args, **kwargs):
+		product_id = self.kwargs["pk"]
+		product = Product.objects.get(id=product_id)
+		print(product)
 		YOUR_DOMAIN = "http://127.0.0.1:8000"
 		checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
@@ -258,9 +280,9 @@ class CreateCheckoutSessionView(View):
                 {
                     'price_data': {
                         'currency': 'eur',
-                        'unit_amount': Product.price,
+                        'unit_amount': product.price,
                         'product_data': {
-                            'name': Product.name,
+                            'name': product.name,
                             # 'images': ['https://i.imgur.com/EHyR2nP.png'],
                         },
                     },
@@ -268,16 +290,83 @@ class CreateCheckoutSessionView(View):
                 },
             ],
 			metadata={
-                "product_id": Product.id
+                "product_id": product.id
             },
             mode='payment',
-            success_url=YOUR_DOMAIN + 'store/success/',
-            cancel_url=YOUR_DOMAIN + 'store/cancel/',
+            success_url=YOUR_DOMAIN + '/success/',
+            cancel_url=YOUR_DOMAIN + '/cancel/',
         )
 		return JsonResponse({
             'id': checkout_session.id
         })
 
+
+
+@csrf_exempt
+def stripe_webhook(request):
+	payload = request.body
+	sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+	event = None
+
+	try:
+		event = stripe.Webhook.construct_event(
+			payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
+		)
+	except ValueError as e:
+		# Invalid payload
+		return HttpResponse(status=400)
+	except stripe.error.SignatureVerificationError as e:
+		# Invalid signature
+		return HttpResponse(status=400)
+	  # Handle the checkout.session.completed event
+	if event['type'] == 'checkout.session.completed':
+		# Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
+		session = stripe.checkout.Session.retrieve(
+		event['data']['object']['id'],
+		expand=['line_items'],
+		)
+		line_items = session.line_items
+		# Fulfill the purchase...
+		#fulfill_order(line_items)
+		print(session)
+		customer_email = session["customer_details"]["email"]
+		product_id = session["metadata"]["product_id"]
+		product = Product.objects.get(id=product_id)
+		send_mail(
+            subject="Here is your product",
+            message=f"Thanks for your purchase. Here is the product you ordered. The URL is {product.url}",
+            recipient_list=[customer_email],
+            from_email="matt@test.com"
+        )
+
+
+	# Passed signature verification
+	return HttpResponse(status=200)
+
+
+
+
+
+class StripeIntentView(View):
+    def post(self, request, *args, **kwargs):
+        try:
+            req_json = json.loads(request.body)
+            customer = stripe.Customer.create(email=req_json['email'])
+            product_id = self.kwargs["pk"]
+            product = Product.objects.get(id=product_id)
+            intent = stripe.PaymentIntent.create(
+                amount=product.price,
+                currency='usd',
+                customer=customer['id'],
+                metadata={
+                    "product_id": product.id
+                }
+            )
+            return JsonResponse({
+                'clientSecret': intent['client_secret']
+            })
+        except Exception as e:
+            return JsonResponse({ 'error': str(e) })
 
 
 
