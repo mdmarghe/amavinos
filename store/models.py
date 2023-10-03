@@ -58,7 +58,7 @@ class Product(models.Model):
 	
 	def snippet(self):
 		if self.description:
-			return self.description[:50] + '...'
+			return self.description[:28] + '...'
 		else:
 			return 'No description available'
 		
