@@ -17,6 +17,10 @@
 				/* Set the maximum height */
 				width: auto; /* Automatically adjust the width to maintain aspect ratio */
 			}
+            .related-image{
+                height:218px;
+                width: auto; 
+            }
         </style>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -85,7 +89,7 @@
                             <!-- Sale badge-->
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                             <!-- Product image-->
-                            <img class="card-img-top" src="{{ product.imageURL }}" alt="{{product.name}}" />
+                            <img  src="{{product.imageURL}}" class="card-img-top related-image" alt="{{product.name}}">
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
