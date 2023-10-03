@@ -76,8 +76,8 @@ def store(request):
 	all_bodegas = Vino.objects.values_list('bodega', flat=True).distinct()
 	bodegas_list=list(all_bodegas)
 
-	all_tipos = Vino.objects.values_list('tipo', flat=True).distinct()
-	tipos_list=list(all_tipos)
+	all_tipos = Vino.objects.exclude(tipo='').values_list('tipo', flat=True).distinct()
+	tipos_list = list(all_tipos)
 
 
 	context = {'products': products, 'cartItems': cartItems, 'bodegas_list':bodegas_list, 'tipos_list':tipos_list}

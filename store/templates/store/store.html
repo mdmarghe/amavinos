@@ -21,26 +21,25 @@
 		
 		<div class="col-sm-12 col-md-3 col-lg-3">
 			<div class="filters">
-				 <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filter<span class="px-1 fas fa-filter"></span></button> </div>
+				<button class="btn btn-success" style="background-color: #800000; border: none;" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">
+					Filter<span class="px-1 fas fa-filter"></span>
+				</button>
+			</div>
 				<div id="mobile-filter">
 					<div class="py-3">
 						<h5 class="font-weight-bold">Categories</h5>
 						<ul class="list-group">
-						<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
-							<form id="filterForm" action="{% url 'filtered_results' %}" method="get">
-								{%for tipo in tipos_list%}
-
-									<button name="q" class="filter-btn" type="submit">
-										
-											{{ tipo }}
-											<span class="badge badge-primary badge-pill">11</span>
+							{% for tipo in tipos_list %}
+							<li class="list-group-item category">
+								<form id="filterForm" action="{% url 'filtered_results' %}" method="get">
+									<button name="category" value="{{ tipo }}" class="filter-btn" type="submit">
+										{{ tipo }}
+										<!-- You can remove the badge if not needed -->
+										<span class="badge badge-primary badge-pill">11</span>
 									</button>
-									
-								{% endfor %}
-								<!-- Add more buttons with different names as needed -->
-							</form>
-						</li>
-							
+								</form>
+							</li>
+							{% endfor %}
 						</ul>
 					</div>
 					<div class="py-3">
