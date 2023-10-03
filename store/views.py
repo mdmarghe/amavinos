@@ -13,6 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 from django.db.models import Q, Count
 from django.core.mail import send_mail
+from random import sample
 
 
 
@@ -114,13 +115,13 @@ def product_detail(request, slug):
 	order = data['order']
 	items = data['items']
 
-	related_products = Product.objects.filter(category='Vino')  # Replace 'category' with the actual field and value you want to filter by
-
-
     # Filtra i prodotti della categoria "Vini"
     
 	product = get_object_or_404(Vino, slug=slug)
-	context = {'product': product, 'cartItems': cartItems}
+	related_products_queryset = Vino.objects.filter(Q(bodega=product.bodega) | Q(denomination=product.denomination)).exclude(slug=slug)
+	related_products = sample(list(related_products_queryset), min(4, related_products_queryset.count()))
+
+	context = {'product': product, 'cartItems': cartItems, 'related_products':related_products}
 	return render(request, 'store/product_detail_originale.html', context)
 
 
