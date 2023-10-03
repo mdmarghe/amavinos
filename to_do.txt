@@ -1,5 +1,4 @@
-arreglar los filtros
-arreglar cata_detail
+
 Intentar a comprar
 grafica
 poner el web en namecheap

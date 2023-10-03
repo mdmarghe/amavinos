@@ -52,6 +52,7 @@ def first_events(request):
 		context = {'products': products, 'cartItems': cartItems}
 		return render(request, 'store/provacatas.html', context)
 
+
 def event_detail(request, slug):
 	data=cartData(request)
 	cartItems = data['cartItems']
@@ -225,7 +226,7 @@ def contacts(request):
 	else:
 		form = ContactForm()
 
-	return render(request, 'store/contacts.html', {'form': form})
+	return render(request, 'store/contacts.html', {'form': form, 'items':items, 'order':order, 'cartItems':cartItems})
 ##STRIPE
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
