@@ -101,7 +101,7 @@ def filters(request,tipo):
 	items = data['items']
 
 	query = request.GET.get("q")
-	products = Product.objects.filter(Q(tipo__icontains=query))
+	products = Vino.objects.filter(Q(tipo__icontains=query))
 
 
 	context = {'products': products, 'cartItems': cartItems}
