@@ -114,6 +114,9 @@ def product_detail(request, slug):
 	order = data['order']
 	items = data['items']
 
+	related_products = Product.objects.filter(category='Vino')  # Replace 'category' with the actual field and value you want to filter by
+
+
     # Filtra i prodotti della categoria "Vini"
     
 	product = get_object_or_404(Vino, slug=slug)
