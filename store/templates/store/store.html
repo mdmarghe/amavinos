@@ -31,7 +31,7 @@
 						<ul class="list-group">
 							{% for tipo in tipos_list %}
 							<li class="list-group-item category">
-								<form id="filterForm" action="{% url 'filtered_results' %}" method="get">
+								<form id="filterForm" action="{% url 'filtered_results' tipo %}" method="get">
 									<button name="category" value="{{ tipo }}" class="filter-btn" type="submit">
 										{{ tipo }}
 										<!-- You can remove the badge if not needed -->

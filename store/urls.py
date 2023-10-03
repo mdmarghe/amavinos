@@ -17,7 +17,7 @@ urlpatterns = [
     path('contactenos/', views.contacts, name="contacts"),
     #path('checkout/', views.ProductLandingPageView.as_view(), name="checkout"),
     path('search/', views.search_results, name="search_results"),
-    path('filtros/', views.filters, name="filtered_results"),
+    path('filtered_products/<tipo>', views.filters, name="filtered_results"),
 
 
 

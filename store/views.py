@@ -94,7 +94,7 @@ def search_results(request):
 	return render(request, 'store/search_results.html', {'products': products, 'cartItems':cartItems})
 
 
-def filters(request):
+def filters(request,tipo):
 	data = cartData(request)
 	cartItems = data['cartItems']
 	order = data['order']
