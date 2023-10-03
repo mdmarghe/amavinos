@@ -1,0 +1,6 @@
+arreglar los filtros
+arreglar cata_detail
+arreglar product_detail
+Intentar a comprar
+grafica
+poner el web en namecheap
