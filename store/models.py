@@ -41,6 +41,8 @@ class Product(models.Model):
 	
 	def __str__(self):
 		return self.name
+	
+
 
 	@property
 	def imageURL(self):
@@ -64,6 +66,9 @@ class Product(models.Model):
 		
 	def display_price(self):
 		return "€{:.2f}".format(self.price/100.0)
+	
+	def nome(self):
+		return self.name.title()
 	
 	
 	

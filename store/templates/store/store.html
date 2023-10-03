@@ -8,7 +8,7 @@
         <div class="col-md-12">
 
 			<!-- Add intro form here -->
-            <h2>Bienvenido a Nuestra Tienda de Vinos</h2>
+            <h1>Bienvenido a Nuestra Tienda de Vinos</h1>
             <p>¡Bienvenidos a nuestra Tienda de Vinos en Sevilla! Aquí podrán embarcarse en un fascinante viaje por toda España con tan solo un sorbo. Nuestra selección de vinos españoles los llevará a través de las regiones vinícolas más icónicas, brindándoles la oportunidad de descubrir los sabores auténticos de este hermoso país. Ya sea que prefieran comprar en línea o visitarnos en nuestro establecimiento físico, estamos comprometidos a brindarles la mejor experiencia posible.
 
 				En nuestra tienda, pueden degustar una variedad de vinos y recibir asesoramiento de nuestros expertos enológicos. Ofrecemos vinos tintos, blancos y dulces de las prestigiosas Denominaciones de Origen de toda España, como Rioja, Ribera del Duero, Priorat y más. Además, proporcionamos un servicio de envío rápido y seguro para que puedan disfrutar de sus vinos favoritos en la comodidad de su hogar.
@@ -18,7 +18,8 @@
     </div>
 	<div class="row">
 		<!--qui i filtri-->
-		<div class="col-sm-12 col-md-3 col-lg-2">
+		
+		<div class="col-sm-12 col-md-3 col-lg-3">
 			<div class="filters">
 				 <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filter<span class="px-1 fas fa-filter"></span></button> </div>
 				<div id="mobile-filter">
@@ -66,12 +67,16 @@
 
 		</div>
 		<!--fine filtri -->
-		<div class="col-sm-12 col-md-9 col-lg-10">
+		<div class="col-sm-12 col-md-9 col-lg-9" >
 			<!-- show products-->
 		<div class="row">
 			<style>
 				.card {
-					margin: 4px; /* Adjust the value as needed */
+					margin: 0.5vw; /* Adjust the value as needed */
+					height: 40vw;
+					width:auto;
+					object-fit: contain; 
+
 				}
 				.reshaped-image {
 					height:300px;
@@ -80,14 +85,14 @@
 					object-fit: contain; 
 				}
 				.card-body {
-					padding: 20px; /* Adjust the value as needed */
+					padding: 7px; /* Adjust the value as needed */
 				}
 			</style>
 			{% for product in products %}
-			<div class="card col-lg-4 col-md-4 col-sm-6 col-9">
+			<div class="card col-lg-3 col-md-4 col-sm-6 col-9">
 				<img  src="{{product.imageURL}}" class="reshaped-image card-img-top" alt="{{product.name}}">
 				<div class="card-body">
-				  <h5 class="card-title">{{product.name}}</h5>
+				  <h5 class="card-title">{{product.nome}}</h5>
 				  <p class="card-text">{{product.display_price}}</p>
 				  <p class="card-text">{{product.snippet}}</p>
 				  <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
@@ -98,7 +103,7 @@
 			{% endfor %}
 		</div>
 	
-	
+		
 		</div>
 	</div>
 	

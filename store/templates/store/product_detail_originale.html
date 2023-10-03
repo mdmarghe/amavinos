@@ -18,8 +18,12 @@
 				width: auto; /* Automatically adjust the width to maintain aspect ratio */
 			}
             .related-image{
-                height:218px;
-                width: auto; 
+                height: 300px;
+                width: 150px; /* Set the desired width */
+                 /* Set the desired height */
+                object-fit: cover; /* Optional: Specifies how the content should be resized to fit its container */
+
+                
             }
         </style>
         <!-- Favicon-->
@@ -86,25 +90,28 @@
                     {% for product in related_products%}
                     <div class="col mb-5">
                         <div class="card h-100">
+                            {%comment%}
                             <!-- Sale badge-->
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            {%endcomment%}
                             <!-- Product image-->
-                            <img  src="{{product.imageURL}}" class="card-img-top related-image" alt="{{product.name}}">
+                            <img src="{{ product.imageURL }}" class="card-img-top related-image" alt="{{ product.name }}">
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">{{product.name}}</h5>
+                                    <h5 class="fw-bolder text-dark">{{ product.name }}</h5>
                                     <!-- Product price-->
-                                    {{product.price}}
+                                    <span class="text-dark">{{ product.display_price }}</span>
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{%url 'product_detail' product.slug %}">View options</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product_detail' product.slug %}">View options</a></div>
                             </div>
                         </div>
                     </div>
+                    
                     {% endfor %}
                     
 
